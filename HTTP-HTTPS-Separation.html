@@ -1,0 +1,48 @@
+<!--
+ * HTTP and HTTPS Separation Tool - HTTP与HTTPS分割工具
+ * 作者：Lucifiel
+ * 日期：2023年3月10日
+ -->
+<html>
+<head>
+	<title>域名分离器</title>
+</head>
+<body>
+	<h1>域名分离器</h1>
+	<p>请在下面输入你的域名，然后点击“拆分域名”</p>
+	<textarea id="domains" rows="10" cols="50"></textarea>
+	<br>
+	<button onclick="splitDomains()">拆分域名</button>
+	<br><br>
+	<h2>HTTP 域名</h2>
+	<pre id="http"></pre>
+	<h2>HTTPS 域名</h2>
+	<pre id="https"></pre>
+
+	<script>
+	function splitDomains() {
+		// Get the input textarea
+		var input = document.getElementById("domains").value;
+		// Split the input by line breaks
+		var lines = input.split("\n");
+		
+		// Create variables for HTTP and HTTPS domains
+		var httpDomains = "";
+		var httpsDomains = "";
+
+		// Loop through the lines and split by http/https
+		for(var i = 0; i < lines.length; i++) {
+			if (lines[i].startsWith("http://")) {
+				httpDomains += lines[i] + "\n";
+			} else if (lines[i].startsWith("https://")) {
+				httpsDomains += lines[i] + "\n";
+			}
+		}
+
+		// Display the output
+		document.getElementById("http").innerHTML = httpDomains;
+		document.getElementById("https").innerHTML = httpsDomains;
+	}
+	</script>
+</body>
+</html>
